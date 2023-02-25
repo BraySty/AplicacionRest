@@ -74,8 +74,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun alerDialog() {
         val alert: AlertDialog.Builder = AlertDialog.Builder(this)
-        alert.setTitle("Ejemplo titulo")
-        alert.setMessage("Ejemplo mensaje")
+        alert.setTitle("GUardar PNG")
+        alert.setMessage("Elegir compresion")
         val linear = LinearLayout(this)
         linear.orientation = LinearLayout.VERTICAL
         var text = TextView(this)
