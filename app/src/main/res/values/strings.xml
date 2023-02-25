@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Nekos Best</string>
+    <string name="nekobestapi">NekoBestAPI</string>
+    <string name="artista">Artista</string>
+    <string name="guardar">Guardar</string>
+    <string name="otra">Otra</string>
+    <string name="cuenta">Cuenta</string>
+    <string name="source">Source</string>
+</resources>
