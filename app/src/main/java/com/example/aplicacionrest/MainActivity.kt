@@ -49,10 +49,10 @@ class MainActivity : AppCompatActivity() {
         interfaz.obtenerNekos().enqueue(object : Callback<Neko> {
             override fun onResponse(call: Call<Neko>, response: Response<Neko>) {
                 if (response.code() == 200) {
-                    var cuerpo = response.body()
-                    var artistName = cuerpo?.results?.get(0)?.artistName
-                    var artistAccount = cuerpo?.results?.get(0)?.artistHref
-                    var artsource = cuerpo?.results?.get(0)?.sourceUrl
+                    val cuerpo = response.body()
+                    val artistName = cuerpo?.results?.get(0)?.artistName
+                    val artistAccount = cuerpo?.results?.get(0)?.artistHref
+                    val artsource = cuerpo?.results?.get(0)?.sourceUrl
                     Picasso.get().load(cuerpo?.results?.get(0)?.url).into(imageView)
                     if (cuerpo != null) {
                         imageURL = cuerpo.results[0].url.toString()
@@ -78,21 +78,23 @@ class MainActivity : AppCompatActivity() {
         alert.setMessage("Elegir compresion")
         val linear = LinearLayout(this)
         linear.orientation = LinearLayout.VERTICAL
-        var text = TextView(this)
+        val text = TextView(this)
         text.setPadding(10, 10, 10, 10)
         val seek = SeekBar(this)
         val input = EditText(this)
-        var compresion: Int = 0
+        var compresion = 0
         linear.addView(text)
         linear.addView(seek)
         linear.addView(input)
         seek.progress = 100
-        text.text = "Compresion ${seek.progress}"
+        var progreso = "Compresion ${seek.progress}"
+        text.text = progreso
         input.setRawInputType(Configuration.KEYBOARDHIDDEN_NO)
         alert.setView(linear)
         seek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                text.text = "Compresion $progress"
+                progreso = "Compresion $progress"
+                text.text = progreso
                 compresion = progress
             }
 
@@ -153,20 +155,20 @@ class MainActivity : AppCompatActivity() {
         } else {
             // El permiso ya ha sido concedido.
             // Aquí es donde puedes guardar la imagen.
-            var bitmap: Bitmap?
-            var filePath: String = ""
+            val bitmap: Bitmap?
             try {
                 bitmap = (imageView.drawable as BitmapDrawable).bitmap
                 // Download Image from URL
                 if (bitmap != null) {
                     val root = Environment.getExternalStorageDirectory().absolutePath
                     val directory = File("$root/NekoBestAPI")
+                    val filePath: String
                     if (directory.exists()) {
                         directory.mkdir()
                     }
                     val file = File(directory, "$nombre.png")
                     filePath = file.canonicalPath
-                    var output: OutputStream = FileOutputStream(file)
+                    val output: OutputStream = FileOutputStream(file)
                     bitmap.compress(Bitmap.CompressFormat.PNG, compression, output)
                     output.flush()
                     output.close()
@@ -176,6 +178,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 println(e.printStackTrace())
+                Toast.makeText(context, "No se puede guardar la imagen porque todavia no se ha descargado.",Toast.LENGTH_SHORT).show()
             }
         }
     }
