@@ -170,13 +170,13 @@ class MainActivity : AppCompatActivity() {
                     bitmap.compress(Bitmap.CompressFormat.PNG, compression, output)
                     output.flush()
                     output.close()
+                    Toast.makeText(context, "Se guardo la imagen $nombre.png en la carpeta $filePath",Toast.LENGTH_SHORT).show()
+                    println("file:/$filePath")
+                    intentGallery()
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                println(e.printStackTrace())
             }
-            Toast.makeText(context, "Se guardo la imagen $nombre.png en la carpeta $filePath",Toast.LENGTH_SHORT).show()
-            println("file:/$filePath")
-
         }
     }
 
